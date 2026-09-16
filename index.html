@@ -16,164 +16,246 @@
     --ink:#4A4442;
     --ink-strong:#231F1E;
     --ink-soft:#6E6864;
-    --hair:rgba(35,31,30,0.12);
+    --hair:rgba(35,31,30,0.14);
     --bg:#F3F2F5;
+    --dot:rgba(35,31,30,0.22);
+    --dot-active:#731DD8;
     color-scheme:light;
   }
   *{box-sizing:border-box;}
-  html,body{height:100%;}
+  html,body{height:100%;margin:0;overflow:hidden;}
   body{
     background:var(--bg);color:var(--ink);font-family:"Roboto",system-ui,sans-serif;
-    font-size:17px;line-height:1.6;padding-inline:0;margin:0;
-    overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;
+    font-size:17px;line-height:1.55;
   }
-  h1,h2{font-family:"Poppins",system-ui,sans-serif;color:var(--ink-strong);text-wrap:balance;margin:0;}
+  h1,h2,h3{font-family:"Poppins",system-ui,sans-serif;color:var(--ink-strong);text-wrap:balance;margin:0;}
   p{margin:0;}
-  .wrap{max-width:720px;margin-inline:auto;padding-inline:24px;width:100%;}
   img{max-width:100%;display:block;}
   .tabnum{font-variant-numeric:tabular-nums;}
 
-  .bg{
+  /* ---- horizontal deck: scrolls sideways, one slide per screen ---- */
+  .deck{
+    display:flex;height:100dvh;height:100vh;width:100%;
+    overflow-x:auto;overflow-y:hidden;
+    scroll-snap-type:x mandatory;scroll-behavior:smooth;
+    -webkit-overflow-scrolling:touch;
+  }
+  .deck::-webkit-scrollbar{display:none;}
+  .slide{
+    flex:0 0 100%;width:100%;height:100%;
+    scroll-snap-align:start;scroll-snap-stop:always;
+    display:flex;align-items:center;justify-content:center;
+    overflow-y:auto;
     background-size:cover;background-repeat:no-repeat;
+    padding:70px 24px;
   }
   .bg-01{background-image:url('assets/fundo-01.png');background-position:top right;}
   .bg-02{background-image:url('assets/fundo-02.png');background-position:center;}
   .bg-03{background-image:url('assets/fundo-03.png');background-position:center;}
 
-  /* each section is one "slide" — snaps vertically, never scrolls sideways */
-  .slide{
-    min-height:100vh;min-height:100dvh;
-    scroll-snap-align:start;scroll-snap-stop:always;
-    display:flex;align-items:center;
-    padding-block:90px;
-  }
+  .wrap{max-width:640px;width:100%;margin-inline:auto;}
 
   .kicker{
     display:block;font-size:13px;letter-spacing:.12em;text-transform:uppercase;
     color:var(--viridian);font-weight:700;margin-bottom:16px;
   }
-  .beat h2{font-size:clamp(28px,4.8vw,42px);font-weight:700;line-height:1.16;max-width:16ch;}
-  .beat .support{margin-top:20px;font-size:17.5px;color:var(--ink-soft);max-width:44ch;line-height:1.6;}
-  .beat .support b{color:var(--ink-strong);font-weight:700;}
+  .slide h2{font-size:clamp(26px,4.4vw,40px);font-weight:700;line-height:1.16;max-width:16ch;}
+  .support{margin-top:18px;font-size:16.5px;color:var(--ink-soft);max-width:44ch;line-height:1.6;}
+  .support b{color:var(--ink-strong);font-weight:700;}
 
-  /* hero */
-  .hero h1{font-size:clamp(32px,6vw,52px);font-weight:800;line-height:1.12;max-width:13ch;}
-  .hero .sub{margin-top:22px;font-size:19px;color:var(--ink-soft);max-width:38ch;}
+  .hero h1{font-size:clamp(30px,5.6vw,48px);font-weight:800;line-height:1.12;max-width:13ch;}
+  .hero .sub{margin-top:20px;font-size:18px;color:var(--ink-soft);max-width:38ch;}
 
-  /* big number */
   .bignum{
     font-family:"Poppins",sans-serif;font-weight:800;color:var(--violet);
-    font-size:clamp(48px,10vw,84px);line-height:1;margin-top:26px;letter-spacing:-.01em;
+    font-size:clamp(44px,9vw,78px);line-height:1;margin-top:22px;letter-spacing:-.01em;
   }
-  .bignum + .capline{margin-top:10px;font-size:15px;color:var(--ink-soft);max-width:34ch;}
+  .bignum + .capline{margin-top:10px;font-size:14.5px;color:var(--ink-soft);max-width:34ch;}
 
-  /* medallion flow */
-  .flow{margin-top:40px;font-size:16px;}
-  .flow .row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-weight:700;color:var(--ink-strong);font-family:"Poppins",sans-serif;font-size:15.5px;}
+  .flow{margin-top:34px;font-size:16px;}
+  .flow .row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-weight:700;color:var(--ink-strong);font-family:"Poppins",sans-serif;font-size:15px;}
   .flow .row span.sep{color:var(--ink-soft);font-weight:400;font-family:"Roboto",sans-serif;}
   .flow .row span.b{color:var(--gold);}
   .flow .row span.s{color:var(--ink-soft);}
   .flow .row span.g{color:var(--violet);}
-  .flow .cap{margin-top:10px;font-size:13.5px;color:var(--ink-soft);}
+  .flow .cap{margin-top:10px;font-size:13px;color:var(--ink-soft);}
 
-  /* twin insight layout */
-  .split{display:flex;gap:44px;flex-wrap:wrap;margin-top:30px;}
-  .split > div{flex:1 1 240px;}
+  .split{display:flex;gap:36px;flex-wrap:wrap;margin-top:26px;}
+  .split > div{flex:1 1 220px;}
 
-  /* 2x2 map, hairline only */
-  .map{margin-top:32px;border-top:1px solid var(--hair);border-left:1px solid var(--hair);display:grid;grid-template-columns:1fr 1fr;}
-  .map .cell{border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:22px 24px;}
-  .map .cell .n{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--viridian);}
-  .map .cell h3{font-family:"Poppins",sans-serif;font-size:18px;font-weight:700;margin-top:6px;}
-  .map .cell p{margin-top:8px;font-size:13.5px;color:var(--ink-soft);font-style:italic;}
-  @media (max-width:560px){.map{grid-template-columns:1fr;}}
+  .map{margin-top:26px;border-top:1px solid var(--hair);border-left:1px solid var(--hair);display:grid;grid-template-columns:1fr 1fr;}
+  .map .cell{border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:18px 20px;}
+  .map .cell .n{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--viridian);}
+  .map .cell h3{font-family:"Poppins",sans-serif;font-size:16.5px;font-weight:700;margin-top:5px;}
+  .map .cell p{margin-top:6px;font-size:13px;color:var(--ink-soft);font-style:italic;}
+  @media (max-width:520px){.map{grid-template-columns:1fr;}}
 
-  footer{padding-block:56px 64px;}
-  .foot-inner{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;}
-  .foot-inner img{height:22px;width:auto;}
-  .foot-meta{font-size:12.5px;color:var(--ink-soft);}
+  .foot-inner{display:flex;gap:14px;align-items:center;margin-top:44px;}
+  .foot-inner img{height:20px;width:auto;}
+  .foot-meta{font-size:12px;color:var(--ink-soft);}
+
+  /* ---- nav: arrows + dots ---- */
+  .navbtn{
+    position:fixed;top:50%;transform:translateY(-50%);z-index:10;
+    width:44px;height:44px;border-radius:50%;border:1px solid var(--hair);
+    background:rgba(255,255,255,0.72);backdrop-filter:blur(6px);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--ink-strong);font-size:18px;cursor:pointer;
+    box-shadow:0 6px 18px -8px rgba(35,31,30,0.3);
+  }
+  .navbtn:hover{background:#fff;}
+  .navbtn.prev{left:16px;}
+  .navbtn.next{right:16px;}
+  .navbtn[disabled]{opacity:.25;cursor:default;pointer-events:none;}
+
+  .dots{
+    position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:10;
+    display:flex;gap:9px;padding:8px 12px;border-radius:999px;
+    background:rgba(255,255,255,0.72);backdrop-filter:blur(6px);
+    border:1px solid var(--hair);
+  }
+  .dots button{
+    width:8px;height:8px;border-radius:50%;border:none;padding:0;
+    background:var(--dot);cursor:pointer;
+  }
+  .dots button.active{background:var(--dot-active);width:20px;border-radius:5px;transition:width .25s;}
+
+  @media (max-width:640px){
+    .navbtn{width:38px;height:38px;font-size:16px;}
+    .slide{padding:56px 20px;}
+  }
 </style>
 </head>
 <body>
-<header class="hero beat slide bg bg-01">
-  <div class="wrap">
-    <h1>Nove arquivos. Nenhuma verdade única.</h1>
-    <p class="sub">Cada área monta seu próprio Excel e distribui por e-mail. Quando dois relatórios discordam, ninguém sabe em qual confiar — e a decisão volta a ser tomada no olho.</p>
-  </div>
-</header>
 
-<section class="beat slide bg bg-02">
-  <div class="wrap">
-    <span class="kicker">A virada</span>
-    <h2>De planilha solta a um único modelo</h2>
-    <p class="support">Os mesmos 9 arquivos, tratados uma vez, viram <b>um</b> modelo — arquitetura medalhão, direto de onde os dados moram até a tela do gestor, sem cópia no meio do caminho.</p>
-    <div class="flow">
-      <div class="row">
-        <span class="b">Bronze</span><span class="sep">→</span>
-        <span class="s">Silver</span><span class="sep">→</span>
-        <span class="g">Gold</span><span class="sep">→</span>
-        <span>Direct Lake</span><span class="sep">→</span>
-        <span>Relatório</span>
-      </div>
-      <p class="cap">Arquivos crus · limpeza e tipagem · modelo em estrela · consumo sem duplicar dado</p>
+<div class="deck" id="deck">
+  <section class="slide hero bg-01">
+    <div class="wrap">
+      <h1>Nove arquivos. Nenhuma verdade única.</h1>
+      <p class="sub">Cada área monta seu próprio Excel e distribui por e-mail. Quando dois relatórios discordam, ninguém sabe em qual confiar — e a decisão volta a ser tomada no olho.</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="beat slide bg bg-03">
-  <div class="wrap">
-    <span class="kicker">O que os dados revelam · 1</span>
-    <h2>A queda de 2021 não é da empresa. É de uma categoria.</h2>
-    <div class="bignum tabnum">-34,7%</div>
-    <p class="capline">Tablets, jan-jul 2020 vs. jan-jul 2021 — enquanto Hardware, Periféricos e Redes seguem estáveis ou positivos no mesmo recorte.</p>
-    <p class="support" style="margin-top:26px;">Olhar só o total (-6,58%) esconde isso. Separar por departamento muda a pergunta de <i>"o que está errado com a empresa"</i> pra <i>"o que está acontecendo com Tablets"</i>.</p>
-  </div>
-</section>
-
-<section class="beat slide bg bg-02">
-  <div class="wrap">
-    <span class="kicker">O que os dados revelam · 2</span>
-    <h2>315 clientes. Zero novos em quatro anos. Crescendo mesmo assim.</h2>
-    <div class="split">
-      <div>
-        <div class="bignum tabnum" style="font-size:clamp(40px,7vw,60px);">~100%</div>
-        <p class="capline">de recorrência — todo cliente ativo num ano já comprava nos anteriores.</p>
-      </div>
-      <div>
-        <p class="support" style="margin-top:0;">O crescimento de 2018 a 2020 veio inteiro de <b>vender mais pra quem já é cliente</b>, não de conquistar gente nova. É fidelidade — e também um risco: a empresa nunca testou o próprio motor de aquisição.</p>
+  <section class="slide bg-02">
+    <div class="wrap">
+      <span class="kicker">A virada</span>
+      <h2>De planilha solta a um único modelo</h2>
+      <p class="support">Os mesmos 9 arquivos, tratados uma vez, viram <b>um</b> modelo — arquitetura medalhão, direto de onde os dados moram até a tela do gestor, sem cópia no meio do caminho.</p>
+      <div class="flow">
+        <div class="row">
+          <span class="b">Bronze</span><span class="sep">→</span>
+          <span class="s">Silver</span><span class="sep">→</span>
+          <span class="g">Gold</span><span class="sep">→</span>
+          <span>Direct Lake</span><span class="sep">→</span>
+          <span>Relatório</span>
+        </div>
+        <p class="cap">Arquivos crus · limpeza e tipagem · modelo em estrela · consumo sem duplicar dado</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="beat slide bg bg-03">
-  <div class="wrap">
-    <span class="kicker">Como isso responde</span>
-    <h2>Uma pergunta, uma página, um número</h2>
-    <p class="support">As quatro análises pedidas viram quatro páginas — cada uma respondendo a uma pergunta específica de gestão.</p>
-    <div class="map">
-      <div class="cell"><span class="n">Vendas</span><h3>Estamos crescendo?</h3><p>Receita, ticket médio, base de clientes.</p></div>
-      <div class="cell"><span class="n">Metas</span><h3>Estamos batendo meta?</h3><p>Por departamento e categoria.</p></div>
-      <div class="cell"><span class="n">Descontos</span><h3>A política está sob controle?</h3><p>Tendência, não só a média.</p></div>
-      <div class="cell"><span class="n">Crescimento</span><h3>Comparado a quando?</h3><p>Sempre o mesmo recorte de período.</p></div>
+  <section class="slide bg-03">
+    <div class="wrap">
+      <span class="kicker">O que os dados revelam · 1</span>
+      <h2>A queda de 2021 não é da empresa. É de uma categoria.</h2>
+      <div class="bignum tabnum">-34,7%</div>
+      <p class="capline">Tablets, jan-jul 2020 vs. jan-jul 2021 — enquanto Hardware, Periféricos e Redes seguem estáveis ou positivos no mesmo recorte.</p>
+      <p class="support" style="margin-top:22px;">Olhar só o total (-6,58%) esconde isso. Separar por departamento muda a pergunta de <i>"o que está errado com a empresa"</i> pra <i>"o que está acontecendo com Tablets"</i>.</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="beat slide bg bg-01">
-  <div class="wrap">
-    <span class="kicker">Fechamento</span>
-    <h2>Um relatório. Não nove verdades.</h2>
-    <p class="support">Construído em Microsoft Fabric com Direct Lake — sem duplicar dado, pronto pra crescer junto com o negócio.</p>
-  </div>
-</section>
+  <section class="slide bg-02">
+    <div class="wrap">
+      <span class="kicker">O que os dados revelam · 2</span>
+      <h2>315 clientes. Zero novos em quatro anos. Crescendo mesmo assim.</h2>
+      <div class="split">
+        <div>
+          <div class="bignum tabnum" style="font-size:clamp(38px,6.4vw,56px);">~100%</div>
+          <p class="capline">de recorrência — todo cliente ativo num ano já comprava nos anteriores.</p>
+        </div>
+        <div>
+          <p class="support" style="margin-top:0;">O crescimento de 2018 a 2020 veio inteiro de <b>vender mais pra quem já é cliente</b>, não de conquistar gente nova. É fidelidade — e também um risco: a empresa nunca testou o próprio motor de aquisição.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<footer>
-  <div class="wrap foot-inner">
-    <img src="assets/logo.png" alt="Fast Import">
-    <span class="foot-meta">Rafael Pinto · Case técnico de Business Intelligence</span>
-  </div>
-</footer>
+  <section class="slide bg-03">
+    <div class="wrap">
+      <span class="kicker">Como isso responde</span>
+      <h2>Uma pergunta, uma página, um número</h2>
+      <p class="support">As quatro análises pedidas viram quatro páginas — cada uma respondendo a uma pergunta específica de gestão.</p>
+      <div class="map">
+        <div class="cell"><span class="n">Vendas</span><h3>Estamos crescendo?</h3><p>Receita, ticket médio, base de clientes.</p></div>
+        <div class="cell"><span class="n">Metas</span><h3>Estamos batendo meta?</h3><p>Por departamento e categoria.</p></div>
+        <div class="cell"><span class="n">Descontos</span><h3>A política está sob controle?</h3><p>Tendência, não só a média.</p></div>
+        <div class="cell"><span class="n">Crescimento</span><h3>Comparado a quando?</h3><p>Sempre o mesmo recorte de período.</p></div>
+      </div>
+    </div>
+  </section>
 
+  <section class="slide bg-01">
+    <div class="wrap">
+      <span class="kicker">Fechamento</span>
+      <h2>Um relatório. Não nove verdades.</h2>
+      <p class="support">Construído em Microsoft Fabric com Direct Lake — sem duplicar dado, pronto pra crescer junto com o negócio.</p>
+      <div class="foot-inner">
+        <img src="assets/logo.png" alt="Fast Import">
+        <span class="foot-meta">Rafael Pinto · Case técnico de Business Intelligence</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<button class="navbtn prev" id="btnPrev" aria-label="Slide anterior">‹</button>
+<button class="navbtn next" id="btnNext" aria-label="Próximo slide">›</button>
+<div class="dots" id="dots"></div>
+
+<script>
+(function(){
+  var deck = document.getElementById('deck');
+  var slides = Array.prototype.slice.call(deck.querySelectorAll('.slide'));
+  var dotsWrap = document.getElementById('dots');
+  var btnPrev = document.getElementById('btnPrev');
+  var btnNext = document.getElementById('btnNext');
+  var current = 0;
+
+  slides.forEach(function(_, i){
+    var b = document.createElement('button');
+    b.setAttribute('aria-label', 'Ir pro slide ' + (i+1));
+    b.addEventListener('click', function(){ goTo(i); });
+    dotsWrap.appendChild(b);
+  });
+  var dotEls = Array.prototype.slice.call(dotsWrap.children);
+
+  function goTo(i){
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    slides[i].scrollIntoView({behavior:'smooth', inline:'start', block:'nearest'});
+  }
+  function updateActive(){
+    var w = deck.clientWidth;
+    var idx = Math.round(deck.scrollLeft / w);
+    idx = Math.max(0, Math.min(slides.length - 1, idx));
+    if(idx === current) return;
+    current = idx;
+    dotEls.forEach(function(d, i){ d.classList.toggle('active', i === current); });
+    btnPrev.disabled = current === 0;
+    btnNext.disabled = current === slides.length - 1;
+  }
+  deck.addEventListener('scroll', function(){
+    window.requestAnimationFrame(updateActive);
+  }, {passive:true});
+
+  btnPrev.addEventListener('click', function(){ goTo(current - 1); });
+  btnNext.addEventListener('click', function(){ goTo(current + 1); });
+
+  window.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowRight' || e.key === ' '){ e.preventDefault(); goTo(current + 1); }
+    if(e.key === 'ArrowLeft'){ e.preventDefault(); goTo(current - 1); }
+  });
+
+  updateActive();
+})();
+</script>
 </body>
 </html>
