@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fast Import BI</title>
+<meta name="description" content="Uma pergunta, uma página, um número — a história por trás do relatório da Fast Import.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --violet:#731DD8;
+    --viridian:#2E7A77;
+    --gold:#9C7B45;
+    --ink:#4A4442;
+    --ink-strong:#231F1E;
+    --ink-soft:#6E6864;
+    --hair:rgba(35,31,30,0.12);
+    --bg:#F3F2F5;
+    color-scheme:light;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    background:var(--bg);color:var(--ink);font-family:"Roboto",system-ui,sans-serif;
+    font-size:17px;line-height:1.6;padding-inline:0;margin:0;
+    overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;
+  }
+  h1,h2{font-family:"Poppins",system-ui,sans-serif;color:var(--ink-strong);text-wrap:balance;margin:0;}
+  p{margin:0;}
+  .wrap{max-width:720px;margin-inline:auto;padding-inline:24px;width:100%;}
+  img{max-width:100%;display:block;}
+  .tabnum{font-variant-numeric:tabular-nums;}
+
+  .bg{
+    background-size:cover;background-repeat:no-repeat;
+  }
+  .bg-01{background-image:url('assets/fundo-01.png');background-position:top right;}
+  .bg-02{background-image:url('assets/fundo-02.png');background-position:center;}
+  .bg-03{background-image:url('assets/fundo-03.png');background-position:center;}
+
+  /* each section is one "slide" — snaps vertically, never scrolls sideways */
+  .slide{
+    min-height:100vh;min-height:100dvh;
+    scroll-snap-align:start;scroll-snap-stop:always;
+    display:flex;align-items:center;
+    padding-block:90px;
+  }
+
+  .kicker{
+    display:block;font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--viridian);font-weight:700;margin-bottom:16px;
+  }
+  .beat h2{font-size:clamp(28px,4.8vw,42px);font-weight:700;line-height:1.16;max-width:16ch;}
+  .beat .support{margin-top:20px;font-size:17.5px;color:var(--ink-soft);max-width:44ch;line-height:1.6;}
+  .beat .support b{color:var(--ink-strong);font-weight:700;}
+
+  /* hero */
+  .hero h1{font-size:clamp(32px,6vw,52px);font-weight:800;line-height:1.12;max-width:13ch;}
+  .hero .sub{margin-top:22px;font-size:19px;color:var(--ink-soft);max-width:38ch;}
+
+  /* big number */
+  .bignum{
+    font-family:"Poppins",sans-serif;font-weight:800;color:var(--violet);
+    font-size:clamp(48px,10vw,84px);line-height:1;margin-top:26px;letter-spacing:-.01em;
+  }
+  .bignum + .capline{margin-top:10px;font-size:15px;color:var(--ink-soft);max-width:34ch;}
+
+  /* medallion flow */
+  .flow{margin-top:40px;font-size:16px;}
+  .flow .row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-weight:700;color:var(--ink-strong);font-family:"Poppins",sans-serif;font-size:15.5px;}
+  .flow .row span.sep{color:var(--ink-soft);font-weight:400;font-family:"Roboto",sans-serif;}
+  .flow .row span.b{color:var(--gold);}
+  .flow .row span.s{color:var(--ink-soft);}
+  .flow .row span.g{color:var(--violet);}
+  .flow .cap{margin-top:10px;font-size:13.5px;color:var(--ink-soft);}
+
+  /* twin insight layout */
+  .split{display:flex;gap:44px;flex-wrap:wrap;margin-top:30px;}
+  .split > div{flex:1 1 240px;}
+
+  /* 2x2 map, hairline only */
+  .map{margin-top:32px;border-top:1px solid var(--hair);border-left:1px solid var(--hair);display:grid;grid-template-columns:1fr 1fr;}
+  .map .cell{border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:22px 24px;}
+  .map .cell .n{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--viridian);}
+  .map .cell h3{font-family:"Poppins",sans-serif;font-size:18px;font-weight:700;margin-top:6px;}
+  .map .cell p{margin-top:8px;font-size:13.5px;color:var(--ink-soft);font-style:italic;}
+  @media (max-width:560px){.map{grid-template-columns:1fr;}}
+
+  footer{padding-block:56px 64px;}
+  .foot-inner{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;}
+  .foot-inner img{height:22px;width:auto;}
+  .foot-meta{font-size:12.5px;color:var(--ink-soft);}
+</style>
+</head>
+<body>
+<header class="hero beat slide bg bg-01">
+  <div class="wrap">
+    <h1>Nove arquivos. Nenhuma verdade única.</h1>
+    <p class="sub">Cada área monta seu próprio Excel e distribui por e-mail. Quando dois relatórios discordam, ninguém sabe em qual confiar — e a decisão volta a ser tomada no olho.</p>
+  </div>
+</header>
+
+<section class="beat slide bg bg-02">
+  <div class="wrap">
+    <span class="kicker">A virada</span>
+    <h2>De planilha solta a um único modelo</h2>
+    <p class="support">Os mesmos 9 arquivos, tratados uma vez, viram <b>um</b> modelo — arquitetura medalhão, direto de onde os dados moram até a tela do gestor, sem cópia no meio do caminho.</p>
+    <div class="flow">
+      <div class="row">
+        <span class="b">Bronze</span><span class="sep">→</span>
+        <span class="s">Silver</span><span class="sep">→</span>
+        <span class="g">Gold</span><span class="sep">→</span>
+        <span>Direct Lake</span><span class="sep">→</span>
+        <span>Relatório</span>
+      </div>
+      <p class="cap">Arquivos crus · limpeza e tipagem · modelo em estrela · consumo sem duplicar dado</p>
+    </div>
+  </div>
+</section>
+
+<section class="beat slide bg bg-03">
+  <div class="wrap">
+    <span class="kicker">O que os dados revelam · 1</span>
+    <h2>A queda de 2021 não é da empresa. É de uma categoria.</h2>
+    <div class="bignum tabnum">-34,7%</div>
+    <p class="capline">Tablets, jan-jul 2020 vs. jan-jul 2021 — enquanto Hardware, Periféricos e Redes seguem estáveis ou positivos no mesmo recorte.</p>
+    <p class="support" style="margin-top:26px;">Olhar só o total (-6,58%) esconde isso. Separar por departamento muda a pergunta de <i>"o que está errado com a empresa"</i> pra <i>"o que está acontecendo com Tablets"</i>.</p>
+  </div>
+</section>
+
+<section class="beat slide bg bg-02">
+  <div class="wrap">
+    <span class="kicker">O que os dados revelam · 2</span>
+    <h2>315 clientes. Zero novos em quatro anos. Crescendo mesmo assim.</h2>
+    <div class="split">
+      <div>
+        <div class="bignum tabnum" style="font-size:clamp(40px,7vw,60px);">~100%</div>
+        <p class="capline">de recorrência — todo cliente ativo num ano já comprava nos anteriores.</p>
+      </div>
+      <div>
+        <p class="support" style="margin-top:0;">O crescimento de 2018 a 2020 veio inteiro de <b>vender mais pra quem já é cliente</b>, não de conquistar gente nova. É fidelidade — e também um risco: a empresa nunca testou o próprio motor de aquisição.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="beat slide bg bg-03">
+  <div class="wrap">
+    <span class="kicker">Como isso responde</span>
+    <h2>Uma pergunta, uma página, um número</h2>
+    <p class="support">As quatro análises pedidas viram quatro páginas — cada uma respondendo a uma pergunta específica de gestão.</p>
+    <div class="map">
+      <div class="cell"><span class="n">Vendas</span><h3>Estamos crescendo?</h3><p>Receita, ticket médio, base de clientes.</p></div>
+      <div class="cell"><span class="n">Metas</span><h3>Estamos batendo meta?</h3><p>Por departamento e categoria.</p></div>
+      <div class="cell"><span class="n">Descontos</span><h3>A política está sob controle?</h3><p>Tendência, não só a média.</p></div>
+      <div class="cell"><span class="n">Crescimento</span><h3>Comparado a quando?</h3><p>Sempre o mesmo recorte de período.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="beat slide bg bg-01">
+  <div class="wrap">
+    <span class="kicker">Fechamento</span>
+    <h2>Um relatório. Não nove verdades.</h2>
+    <p class="support">Construído em Microsoft Fabric com Direct Lake — sem duplicar dado, pronto pra crescer junto com o negócio.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <img src="assets/logo.png" alt="Fast Import">
+    <span class="foot-meta">Rafael Pinto · Case técnico de Business Intelligence</span>
+  </div>
+</footer>
+
+</body>
+</html>
