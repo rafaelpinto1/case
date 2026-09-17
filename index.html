@@ -85,10 +85,14 @@
 
   .map{margin-top:26px;border-top:1px solid var(--hair);border-left:1px solid var(--hair);display:grid;grid-template-columns:1fr 1fr;}
   .map .cell{border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:18px 20px;}
+  .map .cell-wide{grid-column:1 / -1;}
   .map .cell .n{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--viridian);}
   .map .cell h3{font-family:"Poppins",sans-serif;font-size:16.5px;font-weight:700;margin-top:5px;}
   .map .cell p{margin-top:6px;font-size:13px;color:var(--ink-soft);font-style:italic;}
   @media (max-width:520px){.map{grid-template-columns:1fr;}}
+
+  .wrap-report{max-width:1100px;width:100%;margin-inline:auto;}
+  .report-frame{width:100%;aspect-ratio:1140/541.25;border:0;border-radius:12px;box-shadow:0 12px 34px -14px rgba(35,31,30,0.35);display:block;}
 
   .foot-inner{display:flex;gap:14px;align-items:center;margin-top:44px;}
   .foot-inner img{height:20px;width:auto;}
@@ -184,13 +188,22 @@
     <div class="wrap">
       <span class="kicker">Como isso responde</span>
       <h2>Uma pergunta, uma página, um número</h2>
-      <p class="support">As quatro análises pedidas viram quatro páginas — cada uma respondendo a uma pergunta específica de gestão.</p>
+      <p class="support">As análises pedidas viram cinco páginas — cada uma respondendo a uma pergunta específica de gestão.</p>
       <div class="map">
+        <div class="cell cell-wide"><span class="n">Visão Geral</span><h3>Por onde eu começo?</h3><p>Painel executivo com o resumo de tudo.</p></div>
         <div class="cell"><span class="n">Vendas</span><h3>Estamos crescendo?</h3><p>Receita, ticket médio, base de clientes.</p></div>
+        <div class="cell"><span class="n">Crescimento</span><h3>Comparado a quando?</h3><p>Sempre o mesmo recorte de período.</p></div>
         <div class="cell"><span class="n">Metas</span><h3>Estamos batendo meta?</h3><p>Por departamento e categoria.</p></div>
         <div class="cell"><span class="n">Descontos</span><h3>A política está sob controle?</h3><p>Tendência, não só a média.</p></div>
-        <div class="cell"><span class="n">Crescimento</span><h3>Comparado a quando?</h3><p>Sempre o mesmo recorte de período.</p></div>
       </div>
+    </div>
+  </section>
+
+  <section class="slide bg-02">
+    <div class="wrap-report">
+      <span class="kicker">O relatório, ao vivo</span>
+      <h2 style="margin-bottom:18px;">Navegue pelas 5 páginas</h2>
+      <iframe class="report-frame" title="RL_FastImport" src="https://app.fabric.microsoft.com/reportEmbed?reportId=cb50662e-eee5-4095-8f39-38f131f58e21&autoAuth=true&ctid=8eeca404-a47d-4555-a2d4-0f3619041c9c" allowfullscreen="true"></iframe>
     </div>
   </section>
 
